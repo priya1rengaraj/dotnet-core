@@ -3,6 +3,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5143); // Allow external access
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
