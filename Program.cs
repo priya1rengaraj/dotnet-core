@@ -5,8 +5,11 @@ builder.Services.AddRazorPages();
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenAnyIP(5143); // Allow external access
+    // Azure provides the port via environment variable "PORT"
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+    options.ListenAnyIP(int.Parse(port));
 });
+
 
 
 var app = builder.Build();
